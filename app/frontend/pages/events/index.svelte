@@ -1,5 +1,7 @@
 <script>
   export let events
+  import { Button } from "$lib/components/ui/button";
+
 </script>
 
 <h1 class="text-3xl font-bold underline">Hello World!</h1>
@@ -12,3 +14,5 @@
     <a href="/event/{event.id}">{event.title}</a>
   </div>
 {/each}
+
+<Button>Click me</Button>
