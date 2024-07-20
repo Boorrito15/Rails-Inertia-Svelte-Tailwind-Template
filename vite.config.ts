@@ -8,7 +8,11 @@ export default defineConfig({
     dedupe: ["axios"],
     alias: {
       $lib: path.resolve("./src/lib"),
+      "svelte-radix": path.resolve(__dirname, "node_modules/svelte-radix/dist"),
     },
   },
   plugins: [RubyPlugin(), svelte()],
+  optimizeDeps: {
+    include: ["svelte-radix"],
+  },
 });
