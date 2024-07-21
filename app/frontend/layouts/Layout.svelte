@@ -9,7 +9,7 @@
 
 </script>
 
-<ModeWatcher/>
+<ModeWatcher defaultMode={"light"} />
 
 <div class="p-12">
   <Button on:click={toggleMode} variant="outline" size="icon">
