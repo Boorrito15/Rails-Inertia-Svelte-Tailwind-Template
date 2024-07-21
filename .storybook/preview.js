@@ -1,3 +1,5 @@
+import "../app/frontend/stylesheets/main.css";
+
 /** @type { import('@storybook/svelte').Preview } */
 const preview = {
   parameters: {

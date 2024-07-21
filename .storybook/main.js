@@ -1,4 +1,18 @@
-export default {
-  // ...
-  framework: "@storybook/svelte-vite", // 👈 Add this
+/** @type { import('@storybook/svelte-vite').StorybookConfig } */
+const config = {
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx|svelte)"],
+  addons: [
+    "@storybook/addon-svelte-csf",
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
+  ],
+  framework: {
+    name: "@storybook/svelte-vite",
+    options: {},
+  },
+  docs: {
+    autodocs: "tag",
+  },
 };
+export default config;
