@@ -1,15 +1,20 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { ModeWatcher } from "mode-watcher";
-
-  // Adjust the import path according to your project structure
-  import { Button } from "$lib/components/ui/button"
+  import { Button } from "$lib/components/ui/button";
   import Sun from "svelte-radix/Sun.svelte";
   import Moon from "svelte-radix/Moon.svelte";
   import { toggleMode } from 'mode-watcher';
+  import MainNav from "../components/Layouts/MainNav.svelte";
 
+  //   // Force light mode on initial load
+  // onMount(() => {
+  //   document.documentElement.classList.remove('dark');
+  //   localStorage.setItem('theme', 'light'); // Ensure the theme is saved in local storage
+  // });
 </script>
 
-<ModeWatcher defaultMode={"light"} />
+<ModeWatcher defaultMode="light" />
 
 <div class="p-12">
   <Button on:click={toggleMode} variant="outline" size="icon">
@@ -24,9 +29,10 @@
 </div>
 
 <div>
+  <MainNav />
   <main>
     <div class="px-4 mx-auto max-w-7xl sm:px-8">
-      <slot/>
+      <slot />
     </div>
   </main>
 </div>
