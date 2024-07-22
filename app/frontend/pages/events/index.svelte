@@ -9,6 +9,6 @@
 
 {#each events as event}
   <div>
-    <a href="/event/{event.id}">{event.title}</a>
+    <a href="/events/{event.id}">{event.title}</a>
   </div>
 {/each}
