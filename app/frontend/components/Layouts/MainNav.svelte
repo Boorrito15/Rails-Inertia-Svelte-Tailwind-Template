@@ -1,3 +1,5 @@
+<!-- frontend/components/Layouts/MainNav.svelte -->
+
 <script>
   import { Link, page, inertia } from '@inertiajs/svelte'
 </script>
@@ -10,9 +12,6 @@
     <li>
       <Link href="/events">Events</Link>
     </li>
-    <!-- <li>
-      <Link href="/about">About</Link>
-    </li> -->
   </ul>
 
   <div>
@@ -23,6 +22,7 @@
       </button>
     {:else}
       <Link href="/login">Sign in</Link>
+      <Link href="/sign_up">Sign up</Link>
     {/if}
   </div>
 </nav>
