@@ -12,3 +12,5 @@
     <a href="/events/{event.id}">{event.title}</a>
   </div>
 {/each}
+
+<a href="/events/new">New Event</a>

@@ -11,7 +11,8 @@ class EventsController < ApplicationController
   end
 
   def new
-    render inertia: 'events/new'
+    # render inertia: 'events/new'
+    @event = Event.new
   end
 
   def create
