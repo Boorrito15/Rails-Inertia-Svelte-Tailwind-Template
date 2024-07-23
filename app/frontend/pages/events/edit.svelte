@@ -1,19 +1,20 @@
 <script>
   import { useForm } from '@inertiajs/svelte'
 
+  export let event
+
   let form = useForm({
-    title: null,
-    description: null,
-    start_date: null
+    title: event.title,
+    description: event.description,
+    start_date: event.start_date // This should be in the 'YYYY-MM-DDTHH:MM' format
   })
 
   function submit() {
-    $form.post('/events')
+    $form.put(`/events/${event.id}`)
   }
 </script>
 
 <form on:submit|preventDefault={submit}>
-
   <div>
     <label for="title">Title</label>
     <input type="text" bind:value={$form.title} />
@@ -30,13 +31,13 @@
     {/if}
   </div>
 
-
   <div>
     <label for="start_date">Start Date</label>
-    <input id="start_date" type="datetime-local" bind:value={$form.start_date} />
+    <input type="datetime-local" bind:value={$form.start_date} />
     {#if $form.errors.start_date}
       <div class="form-error">{$form.errors.start_date}</div>
     {/if}
   </div>
+
   <button type="submit" disabled={$form.processing}>Submit</button>
 </form>
