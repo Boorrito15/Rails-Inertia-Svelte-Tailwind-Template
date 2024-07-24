@@ -3,6 +3,7 @@
   import { useForm, router } from '@inertiajs/svelte';
   import { createEventDispatcher } from 'svelte';
 
+  export let toggleEditForm
   export let event;
 
   const dispatch = createEventDispatcher();
@@ -27,6 +28,15 @@
       }
     });
     dispatch('submitted');
+  }
+
+  function cancel() {
+    $form.reset();
+    if (toggleEditForm) {
+      toggleEditForm();
+    } else {
+      router.visit('/events'); // Hide the form when cancel is clicked
+    }
   }
 </script>
 
@@ -56,4 +66,5 @@
   </div>
 
   <button type="submit" disabled={$form.processing}>Submit</button>
+  <button type="button" on:click={cancel}>Cancel</button>
 </form>
