@@ -10,7 +10,6 @@
   async function submit() {
     await $form.post('/events')
     $form.reset()
-    console.log($form.title)
   }
 </script>
 

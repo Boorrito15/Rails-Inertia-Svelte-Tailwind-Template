@@ -1,23 +1,32 @@
-<script>
-  import dayjs from 'dayjs'
-  import { useForm } from '@inertiajs/svelte'
+<script lang="ts">
+  import dayjs from 'dayjs';
+  import { useForm, router } from '@inertiajs/svelte';
+  import { createEventDispatcher } from 'svelte';
 
-  export let event
+  export let event;
+
+  const dispatch = createEventDispatcher();
 
   // Format the date for the datetime-local input
   let formattedStartDate = event.start_date
     ? dayjs(event.start_date).format('YYYY-MM-DDTHH:mm')
-    : ''
+    : '';
 
   // Initialize the form with formatted date
   let form = useForm({
     title: event.title,
     description: event.description,
     start_date: formattedStartDate // Use formatted date
-  })
+  });
 
-  function submit() {
-    $form.put(`/events/${event.id}`, form.data)
+  async function submit() {
+    await $form.put(`/events/${event.id}`, {
+      onSuccess: () => {
+        $form.reset();
+        router.visit('/events');
+      }
+    });
+    dispatch('submitted');
   }
 </script>
 
