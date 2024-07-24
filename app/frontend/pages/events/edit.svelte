@@ -1,16 +1,23 @@
 <script>
+  import dayjs from 'dayjs'
   import { useForm } from '@inertiajs/svelte'
 
   export let event
 
+  // Format the date for the datetime-local input
+  let formattedStartDate = event.start_date
+    ? dayjs(event.start_date).format('YYYY-MM-DDTHH:mm')
+    : ''
+
+  // Initialize the form with formatted date
   let form = useForm({
     title: event.title,
     description: event.description,
-    start_date: event.start_date // This should be in the 'YYYY-MM-DDTHH:MM' format
+    start_date: formattedStartDate // Use formatted date
   })
 
   function submit() {
-    $form.put(`/events/${event.id}`)
+    $form.put(`/events/${event.id}`, form.data)
   }
 </script>
 

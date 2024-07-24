@@ -1,39 +1,29 @@
 class EventsController < ApplicationController
   include Auth
-
-  before_action :set_event, only: %i[ show edit update ]
+  before_action :set_event, only: %i[ show edit update destroy ]
 
   def index
-    @events = Event.all
+    @events = Event.all.order(:id)
   end
 
   def show
   end
 
   def new
-    # render inertia: 'events/new'
     @event = Event.new
   end
 
   def create
     event = Event.new(event_params)
-
     if event.save
-      redirect_to events_path, notice: 'event created.'
+      redirect_to events_path, notice: 'Event created.'
     else
       redirect_to new_event_path, inertia: { errors: event.errors }
     end
   end
 
   def edit
-    formatted_start_date = @event.start_date.strftime('%Y-%m-%dT%H:%M') if @event.start_date
-    render inertia: 'events/edit', props: {
-      event: @event.as_json(
-        only: [:id, :title, :description, :start_date]
-      ).merge(start_date: formatted_start_date)
-    }
   end
-
 
   def update
     if @event.update(event_params)
@@ -41,6 +31,11 @@ class EventsController < ApplicationController
     else
       redirect_to edit_event_path(@event), inertia: { errors: @event.errors }
     end
+  end
+
+  def destroy
+    @event.destroy
+    redirect_to events_path, notice: 'Event was successfully deleted.'
   end
 
   private
