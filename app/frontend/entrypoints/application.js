@@ -1,3 +1,4 @@
+// app / frontend / entrypoints / application.js;
 import "../stylesheets/main.css";
 import Layout from "../layouts/Layout.svelte";
 import { createInertiaApp } from "@inertiajs/svelte";

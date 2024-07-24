@@ -1,10 +1,15 @@
-<!-- frontend/components/Layouts/MainNav.svelte -->
-
 <script>
-  import { Link, page, inertia } from '@inertiajs/svelte'
+  import { Link, inertia, page } from '@inertiajs/svelte';
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
   import { Button } from "$lib/components/ui/button";
   import { userStore } from "../../stores/userStore";
+
+  // Subscribe to the userStore
+  let user;
+  $: userStore.subscribe(value => {
+    user = value;
+  });
+
 </script>
 
 <nav class="flex justify-between p-6 mx-auto max-w-7xl">
@@ -17,9 +22,9 @@
     </li>
   </ul>
 
-  <div>
-    {#if $page.props.auth}
-      <div>Welcome, {$userStore.email}!</div>
+  <div class="flex items-center space-x-2">
+    {#if $page.props.auth && $page.props.auth.user}
+      <div>{$page.props.auth.user.first_name}</div>
 
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild let:builder>
@@ -51,8 +56,6 @@
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Root>
-
-
     {:else}
       <Link href="/login">Sign in</Link>
       <Link href="/sign_up">Sign up</Link>

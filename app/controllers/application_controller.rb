@@ -1,3 +1,4 @@
+# app/controllers/application_controller.rb
 class ApplicationController < ActionController::Base
   use_inertia_instance_props
   include InertiaCsrf
