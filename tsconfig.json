@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     // ... other options
     "paths": {
       "$lib": ["./src/lib"],
