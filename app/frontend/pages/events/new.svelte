@@ -1,15 +1,29 @@
 <script lang="ts">
-  import { useForm } from '@inertiajs/svelte'
+  import { useForm, router } from '@inertiajs/svelte';
+
+  export let toggleNewForm; // Accept the toggleNewForm function as a prop
 
   let form = useForm({
     title: null,
     description: null,
     start_date: null
-  })
+  });
 
   async function submit() {
-    await $form.post('/events')
-    $form.reset()
+    await $form.post('/events');
+    $form.reset();
+    if (toggleNewForm) {
+      toggleNewForm();
+    }
+  }
+
+  function cancel() {
+    $form.reset();
+    if (toggleNewForm) {
+      toggleNewForm();
+    } else {
+      router.visit('/events') // Hide the form when cancel is clicked
+    }
   }
 </script>
 
@@ -40,4 +54,5 @@
   </div>
 
   <button type="submit" disabled={$form.processing}>Submit</button>
+  <button type="button" on:click={cancel}>Cancel</button>
 </form>
