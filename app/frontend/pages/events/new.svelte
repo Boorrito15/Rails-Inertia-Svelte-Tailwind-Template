@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { useForm } from '@inertiajs/svelte'
 
   let form = useForm({
@@ -7,8 +7,9 @@
     start_date: null
   })
 
-  function submit() {
-    $form.post('/events')
+  async function submit() {
+    await $form.post('/events')
+    $form.reset()
   }
 </script>
 
@@ -30,7 +31,6 @@
     {/if}
   </div>
 
-
   <div>
     <label for="start_date">Start Date</label>
     <input id="start_date" type="datetime-local" bind:value={$form.start_date} />
@@ -38,5 +38,6 @@
       <div class="form-error">{$form.errors.start_date}</div>
     {/if}
   </div>
+
   <button type="submit" disabled={$form.processing}>Submit</button>
 </form>

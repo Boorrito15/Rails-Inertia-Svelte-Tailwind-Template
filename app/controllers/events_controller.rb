@@ -27,7 +27,7 @@ class EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      redirect_to event_path(@event), notice: 'Event was successfully updated.'
+      redirect_to events_path, notice: 'Event was successfully updated.'
     else
       redirect_to edit_event_path(@event), inertia: { errors: @event.errors }
     end
