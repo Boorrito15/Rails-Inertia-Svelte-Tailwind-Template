@@ -1,14 +1,27 @@
 Rails.application.routes.draw do
   # devise_for :users
   # devise routes
-  devise_for :users, skip: [ :sessions, :passwords, :registrations ]
+  devise_for :users, skip: [:sessions, :registrations, :passwords], controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    passwords: 'users/passwords'
+  }
+
   as :user do
+    # Custom session routes
     get 'login', to: 'users/sessions#new', as: :new_user_session
     post 'login', to: 'users/sessions#create', as: :user_session
     match 'logout', to: 'users/sessions#destroy', as: :destroy_user_session, via: Devise.mappings[:user].sign_out_via
 
+    # Custom registration routes
     get 'sign_up', to: 'users/registrations#new', as: :new_user_registration
     post 'sign_up', to: 'users/registrations#create', as: :user_registration
+
+    # Custom password routes
+    get 'password/new', to: 'users/passwords#new', as: :new_user_password
+    post 'password/email', to: 'users/passwords#create', as: :user_password
+    get 'password/edit', to: 'users/passwords#edit', as: :edit_user_password
+    put 'password', to: 'users/passwords#update', as: :update_user_password
   end
 
   resources :events
