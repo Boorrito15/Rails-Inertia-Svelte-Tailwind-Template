@@ -18,7 +18,7 @@
   });
 
   function submit() {
-    $form.post('/login');
+    form.post('/login');
   }
 </script>
 
@@ -48,8 +48,11 @@
         <Label for="remember">Remember Me</Label>
       </div>
     </Card.Content>
-    <Card.Footer>
+    <Card.Footer class="flex flex-col items-center">
       <Button class="w-full" type="submit" disabled={$form.processing}>Sign in</Button>
+      <div class="mt-4 text-center">
+        <a href="/password/new" class="text-sm text-blue-500 hover:underline">Forgot Password?</a>
+      </div>
     </Card.Footer>
   </form>
 </Card.Root>
